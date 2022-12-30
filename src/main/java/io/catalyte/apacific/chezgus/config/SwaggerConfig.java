@@ -26,6 +26,4 @@ public class SwaggerConfig {
                 .paths(Predicates.not(PathSelectors.regex("/error")))//Exclude Spring error controllers
                 .build();
     }
-
-
 }
