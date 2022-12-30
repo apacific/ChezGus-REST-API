@@ -1,5 +1,5 @@
 # "Chez Gus"
 ## about
-proof of concept - restaurant menu app
+proof of concept - restaurant menu and ordering app
 
 
