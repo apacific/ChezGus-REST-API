@@ -14,6 +14,7 @@ public class StringConstants {
             "The database is not running, service is unavailable at the moment";
     public static final String UNEXPECTED_SERVER_ERROR = "An unexpected server error has occurred";
     public static final String NOT_FOUND = "Not Found";
+    public static final String ORDER_ID_NOT_FOUND = "This order id isn't in the database";
     public static final String BAD_DATA = "Bad Data";
     public static final String SERVER_ERROR = "Server Error";
     public static final String UNEXPECTED_ERROR = "Unexpected Server Error";
