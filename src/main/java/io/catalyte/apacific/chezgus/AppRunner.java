@@ -1,4 +1,4 @@
-package io.catalyte.apacific.chezgus.services;
+package io.catalyte.apacific.chezgus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
