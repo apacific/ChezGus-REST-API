@@ -2,6 +2,7 @@ package io.catalyte.apacific.chezgus.services;
 
 import io.catalyte.apacific.chezgus.entities.Item;
 import io.catalyte.apacific.chezgus.exceptions.BadDataResponse;
+import io.catalyte.apacific.chezgus.exceptions.ResourceNotFound;
 import io.catalyte.apacific.chezgus.exceptions.ServiceUnavailable;
 import io.catalyte.apacific.chezgus.repositories.ItemRepository;
 import io.catalyte.apacific.chezgus.repositories.OrderRepository;
@@ -20,7 +21,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 
-import static io.catalyte.apacific.chezgus.constants.StringConstants.ORDER_ID_NOT_FOUND;
+import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
 
 /**
  * service class that implements ItemService interface

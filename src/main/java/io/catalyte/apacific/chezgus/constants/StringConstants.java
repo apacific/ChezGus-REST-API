@@ -14,8 +14,15 @@ public class StringConstants {
             "The database is not running, service is unavailable at the moment";
     public static final String UNEXPECTED_SERVER_ERROR = "An unexpected server error has occurred";
     public static final String NOT_FOUND = "Not Found";
+    public static final String ID_NOT_FOUND =
+            "You attempted an operation on an id that does not exist in the database";
+    public static final String ID_MUST_MATCH = "ID must match the ID specified in the URL.";
     public static final String ORDER_ID_NOT_FOUND = "This order id isn't in the database";
+    public static final String ORDER_ID_MUST_MATCH =
+            "The order id must match" + " orderId";
     public static final String BAD_DATA = "Bad Data";
+    public static final String BAD_REQUEST_DECIMAL =
+            "Item price must " + "have exactly 2 decimal places";
     public static final String SERVER_ERROR = "Server Error";
     public static final String UNEXPECTED_ERROR = "Unexpected Server Error";
     public static final String VALIDATION_ERROR = "Validation Error";
