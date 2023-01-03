@@ -10,11 +10,11 @@ public interface ItemService {
  * item service interface with create and update methods for an item
  */
 
-    List<Item> getItems(Long orderId);
+    List<Item> getItems();
 
-    Item getItemById(Long orderId, Long id);
+    Item getItemById(Long id);
 
-    Item addItem(Long orderId, Item item);
+    Item addItem(Item item);
 
-    Item updateItemById(Long orderId, Long id, Item item);
+    Item updateItemById(Long id, Item item);
 }

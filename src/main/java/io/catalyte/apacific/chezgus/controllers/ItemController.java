@@ -50,7 +50,7 @@ public class ItemController {
         logger
                 .info(new Date() + " Get request received of items for patient with id: " + orderId);
 
-        return new ResponseEntity<>(itemService.getItems(orderId), HttpStatus.OK);
+        return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ItemController {
                                         @PathVariable Long id) {
         logger.info(new Date() + " Get by id: " + id + " for order with id: " + orderId);
 
-        return new ResponseEntity<>(itemService.getItemById(orderId, id), HttpStatus.OK);
+        return new ResponseEntity<>(itemService.getItemById(id), HttpStatus.OK);
     }
 
     /**
@@ -86,7 +86,7 @@ public class ItemController {
                                                   @Valid @RequestBody Item item) {
         logger.info(new Date() + "  Item POST request received");
 
-        return new ResponseEntity<>(itemService.addItem(orderId, item),
+        return new ResponseEntity<>(itemService.addItem(item),
                 HttpStatus.CREATED);
     }
 
@@ -107,7 +107,7 @@ public class ItemController {
                                                          @PathVariable Long id, @Valid @RequestBody Item item) {
         logger.info(new Date() + " Item PUT request received for id: " + id);
 
-        return new ResponseEntity<>(itemService.updateItemById(orderId, id, item),
+        return new ResponseEntity<>(itemService.updateItemById(id, item),
                 HttpStatus.OK);
     }
 }

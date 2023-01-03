@@ -38,34 +38,14 @@ public class ItemServiceImpl implements ItemService {
     ItemRepository itemRepository;
 
     /**
-     * Gets items from the database based on a order's id
+     * Gets all items from the database
      *
-     * @param orderId the id of the order whose item it is
      * @return a lists of items or an error
      */
     @Override
-    public List<Item> getItems(Long orderId) {
-
-        boolean validOrderId;
-        Item item = new Item();
-        item.setOrderId(orderId);
-
-        //check if order id in item's information is in database
+    public List<Item> getItems() {
         try {
-            validOrderId = orderRepository.existsById(orderId);
-        } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
-            throw new ServiceUnavailable(e);
-        }
-
-        //throw error if order doesn't exist
-        if (!validOrderId) {
-            throw new BadDataResponse(ORDER_ID_NOT_FOUND);
-        }
-
-        try {
-            Example<Item> itemExample = Example.of(item);
-            return itemRepository.findAll(itemExample);
+            return itemRepository.findAll();
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new ServiceUnavailable(e);
@@ -75,77 +55,32 @@ public class ItemServiceImpl implements ItemService {
     /**
      * Gets an item by its id
      *
-     * @param orderId the id of the order whose item it is
-     * @param id        the item's id
+     * @param id the item's id
      * @return an item or an error
      */
     @Override
-    public Item getItemById(Long orderId, Long id) {
-        boolean validOrderId;
+    public Item getItemById(Long id) {
         Item item;
-
-        //check if order id in item's information is in database
-        try {
-            validOrderId = orderRepository.existsById(orderId);
-        } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
-            throw new HttpServerErrorException.ServiceUnavailable(e);
-        }
-
-        //throw error if order doesn't exist
-        if (!validOrderId) {
-            throw new BadDataResponse(ORDER_ID_NOT_FOUND);
-        }
-
         try {
             item = itemRepository.findById(id).orElse(null);
-            if (item != null && item.getOrderId().equals(orderId)) {
-                return item;
+            if (item == null) {
+                throw new ResourceNotFound(ID_NOT_FOUND);
             }
-        } catch (Exception e) {
+        } catch (ResourceNotFound | ServiceUnavailable e) {
             logger.error(e.getLocalizedMessage());
-            throw new ServiceUnavailable(e);
+            throw e;
         }
-        throw new ResourceNotFound(ITEM_ID_NOT_FOUND);
+        return item;
     }
 
     /**
      * Add an item to the database
      *
-     * @param orderId the id of the item's order
      * @param item the item to be added
      * @return the added item or an error
      */
     @Override
-    public Item addItem(Long orderId, Item item) {
-
-        boolean validOrderId;
-        boolean sameOrderId;
-
-        sameOrderId = orderId.equals(item.getOrderId());
-
-        //throw error if order id passed in does not equal order id in item's information
-        if (!sameOrderId) {
-            throw new BadDataResponse(ORDER_ID_MUST_MATCH);
-        }
-
-        //check if order id in item's information is in database
-        try {
-            validOrderId = orderRepository.existsById(item.getOrderId());
-        } catch (Exception e) {
-            throw new ServiceUnavailable(e);
-        }
-
-        //throw error if order doesn't exist
-        if (!validOrderId) {
-            throw new BadDataResponse(ORDER_ID_NOT_FOUND);
-        }
-
-        //check if total cost and copay have exactly 2 decimal places
-        if (item.getCopay().scale() != 2 || item.getTotalCost().scale() != 2) {
-            throw new BadDataResponse(BAD_REQUEST_DECIMAL);
-        }
-
+    public Item addItem(Item item) {
         try {
             return itemRepository.save(item);
         } catch (Exception e) {
@@ -157,37 +92,30 @@ public class ItemServiceImpl implements ItemService {
     /**
      * Update an item with an specific id
      *
-     * @param orderId the id of the item's order
-     * @param id        the item's id
+     * @param id   the item's id
      * @param item the item's new information
      * @return an item
      */
     @Override
-    public Item updateItemById(Long orderId, Long id, Item item) {
+    public Item updateItemById(Long id, Item item) {
 
         Item existingItem;
-
         //check if id in path matches id in item's new information
         if (!item.getId().equals(id)) {
             throw new BadDataResponse(ID_MUST_MATCH);
         }
+        else if (item.getId() == null) {
+        throw new ResourceNotFound(ID_NOT_FOUND);
+    }
 
         try {
             //get existing item from database
             existingItem = itemRepository.findById(id).orElse(null);
-
-            //throw error if item is null
-            if (existingItem != null && existingItem.getOrderId().equals(orderId)) {
-
-                return this.addItem(orderId, item);
-            }
-
-
+            return this.addItem(item);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new ServiceUnavailable(e);
         }
-        throw new ResourceNotFound(ID_NOT_FOUND);
     }
 }
 
