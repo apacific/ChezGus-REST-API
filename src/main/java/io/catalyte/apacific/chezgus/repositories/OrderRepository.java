@@ -12,6 +12,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     //Queries
     boolean existsByItemId(Long ItemId);
-
-
 }

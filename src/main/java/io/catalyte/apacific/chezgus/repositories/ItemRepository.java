@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    boolean existsByItemId(Long itemId);
+    boolean existsByOrderId(Long orderId);
 }

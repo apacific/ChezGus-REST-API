@@ -22,6 +22,7 @@ public class StringConstants {
     public static final String ORDER_ID_NOT_FOUND = "This order id isn't in the database";
     public static final String ORDER_ID_MUST_MATCH =
             "The order id must match" + " orderId";
+    public static final String ORDER_CONFLICT = "Order has existing items";
     public static final String BAD_DATA = "Bad Data";
     public static final String BAD_REQUEST_DECIMAL =
             "Item price must " + "have exactly 2 decimal places";
