@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * patient repo which stores patients and has a derived method called existsByEmail
+ * Repository to store customer orders.
  */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    //Queries
+    // Queries
     boolean existsByItemId(Long ItemId);
 }
