@@ -21,14 +21,13 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
-
     private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
-    private OrderRepository orderRepository;
+    OrderRepository orderRepository;
 
     @Autowired
-    private ItemRepository itemRepository;
+    ItemRepository itemRepository;
 
     /**
      * Gets orders from the database
@@ -96,14 +95,14 @@ public class OrderServiceImpl implements OrderService {
     public Order updateOrderById(Long id, Order order) {
         Order existingOrder;
 
-        //check if id in path matches order's new information
+        // Checks if id in path matches order's new information
         if (!order.getId().equals(id)) {
             throw new BadDataResponse(ID_MUST_MATCH);
         }
         try {
-            //get the existing order from the database
+            // Gets the existing order from the database
             existingOrder = orderRepository.findById(id).orElse(null);
-            //throws error if order is null
+            // Throws an error if order is null
             if (existingOrder == null) {
                 throw new ResourceNotFound(ID_NOT_FOUND);
             }
@@ -120,26 +119,20 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public void deleteOrder(Long id) {
-
         try {
-            //checks if order exists for tht id
+            // Checks if order exists for that id
             if (orderRepository.existsById(id)) {
-
-                //Throws error if existing order has items in database
-                if (itemRepository.existsByOrderId(id)) {
-                    throw new UniqueFieldViolation(ORDER_CONFLICT);
-                }
-                //delete order if there are no items
+                // Deletes order if it exists
                 orderRepository.deleteById(id);
                 return;
+            } else {
+                // Throws error if order doesn't exist in database
+                logger.error(String.valueOf(new ResourceNotFound(ID_NOT_FOUND)));
+                throw new ResourceNotFound(ID_NOT_FOUND);
             }
         } catch (UniqueFieldViolation | ServiceUnavailable e) {
             logger.error(e.getLocalizedMessage());
             throw e;
         }
-
-        //Throws error if order doesn't exist in database
-        logger.error(String.valueOf(new ResourceNotFound(ID_NOT_FOUND)));
-        throw new ResourceNotFound(ID_NOT_FOUND);
     }
 }

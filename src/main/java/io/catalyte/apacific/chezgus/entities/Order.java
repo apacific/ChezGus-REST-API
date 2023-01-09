@@ -4,9 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 
 import static io.catalyte.apacific.chezgus.constants.StringConstants.GENERATED_ID;
@@ -24,43 +22,42 @@ public class Order {
     @ApiModelProperty(notes = GENERATED_ID)
     private Long id;
 
+    private Long itemId;
+
     @NotNull(message = "totalPrice" + REQUIRED_FIELD)
     @ApiModelProperty(notes = "Total price of order in USD",
             required = true)
     private BigDecimal totalPrice;
 
-    @ApiModelProperty(notes = "Order items")
-    private List<Item> orderItems;
-
-    public Order() { }
+    public Order() {
+    }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Long getItemId() { return itemId; }
+
+    public void setItemId(Long itemId) { this.itemId = itemId; }
+
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
+
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public List<Item> getOrderItems() {
-        return orderItems;
-    }
-    public void setOrderItems(List<Item> orderItems) {
-        this.orderItems = orderItems;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
+                "itemId=" + itemId +
                 ", totalPrice=" + totalPrice +
-                ", orderItems=" + orderItems +
                 '}';
     }
 
@@ -70,12 +67,12 @@ public class Order {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return Objects.equals(id, order.id) &&
-                Objects.equals(totalPrice, order.totalPrice) &&
-                Objects.equals(orderItems, order.orderItems);
+                Objects.equals(itemId, order.itemId) &&
+                Objects.equals(totalPrice, order.totalPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, totalPrice, orderItems);
+        return Objects.hash(id, itemId, totalPrice);
     }
 }

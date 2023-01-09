@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // Queries
-    boolean existsByOrderId(Long orderId);
+    boolean existsById(Long Id);
 }

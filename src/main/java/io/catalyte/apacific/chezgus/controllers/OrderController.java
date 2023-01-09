@@ -47,7 +47,6 @@ public class OrderController {
             response = Order.class)})
     public ResponseEntity<List<Order>> getOrders() {
         logger.info(new Date() + " Get request received");
-
         return new ResponseEntity<>(orderService.getOrders(), HttpStatus.OK);
     }
 
