@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 /**
  * Runs after the server starts and executes methods that load initial datasets into the database
  */
@@ -41,14 +43,38 @@ public class DataLoader implements CommandLineRunner {
     private void loadOrders() {
         orderRepository.save(
                 new Order(
-
+                        1L, 2L, BigDecimal.valueOf(1.00)
+                ));
+        orderRepository.save(
+                new Order(
+                        2L, 4L, BigDecimal.valueOf(1.00)
+                ));
+        orderRepository.save(
+                new Order(
+                        3L, 1L, BigDecimal.valueOf(1.00)
                 ));
     }
 
     private void loadItems() {
         itemRepository.save(
                 new Item(
-
+                        "cheese pizza", "one slice", BigDecimal.valueOf(3.00)
+                ));
+        itemRepository.save(
+                new Item(
+                        "toast", "two slices", BigDecimal.valueOf(1.00)
+                ));
+        itemRepository.save(
+                new Item(
+                        "fries", "hot, salty, crisp, golden", BigDecimal.valueOf(2.50)
+                ));
+        itemRepository.save(
+                new Item(
+                        "cookie", "shortbread, frosted", BigDecimal.valueOf(2.25)
+                ));
+        itemRepository.save(
+                new Item(
+                        "ice cream", "vanilla, two scoops", BigDecimal.valueOf(2.00)
                 ));
     }
 }
