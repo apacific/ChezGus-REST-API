@@ -1,6 +1,7 @@
 package io.catalyte.apacific.chezgus.entities;
 
 import javax.persistence.*;
+
 import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
@@ -34,7 +35,8 @@ public class Item {
             required = true)
     private BigDecimal price;
 
-    public Item() {}
+    public Item() {
+    }
 
     public Item(@NotBlank(message = "name" + REQUIRED_FIELD) String name,
                 @NotBlank(message = "description" + REQUIRED_FIELD) String description,
@@ -45,21 +47,37 @@ public class Item {
         this.price = price;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public BigDecimal getPrice() { return price; }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {
