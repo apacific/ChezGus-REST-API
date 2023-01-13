@@ -32,6 +32,12 @@ public class Order {
     public Order() {
     }
 
+    public Order(Long id, Long itemId, @NotNull(message = "totalPrice" + REQUIRED_FIELD) BigDecimal totalPrice) {
+        this.id = id;
+        this.itemId = itemId;
+        this.totalPrice = totalPrice;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,9 +46,13 @@ public class Order {
         this.id = id;
     }
 
-    public Long getItemId() { return itemId; }
+    public Long getItemId() {
+        return itemId;
+    }
 
-    public void setItemId(Long itemId) { this.itemId = itemId; }
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
