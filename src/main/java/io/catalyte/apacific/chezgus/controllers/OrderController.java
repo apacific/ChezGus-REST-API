@@ -56,7 +56,7 @@ public class OrderController {
      * @param id the order's id from the path variable
      * @return the order with same id
      */
-    @GetMapping(value = ID_ENDPOINT)
+    @GetMapping(ID_ENDPOINT)
     @ApiOperation("Gets an order by ID")
     @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = Order.class),
             @ApiResponse(code = 404, message = HTTP_404)})
@@ -87,7 +87,7 @@ public class OrderController {
      * @param order the order's new information from the request body
      * @return the order if correctly updated
      */
-    @PutMapping(value = ID_ENDPOINT)
+    @PutMapping(ID_ENDPOINT)
     @ApiOperation("Updates order by ID")
     @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = Order.class),
             @ApiResponse(code = 400, message = HTTP_400), @ApiResponse(code = 404, message = HTTP_404),
@@ -103,7 +103,7 @@ public class OrderController {
      *
      * @param id the id of the order to be deleted from the path variable
      */
-    @DeleteMapping(value = ID_ENDPOINT)
+    @DeleteMapping(ID_ENDPOINT)
     @ApiOperation("Deletes order with corresponding ID")
     @ApiResponses(value = {@ApiResponse(code = 204, message = HTTP_204),
             @ApiResponse(code = 404, message = HTTP_404), @ApiResponse(code = 409, message = HTTP_409)})
