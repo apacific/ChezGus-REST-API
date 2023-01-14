@@ -28,6 +28,7 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
 @ApiResponses(value = {@ApiResponse(code = 500, message = UNEXPECTED_SERVER_ERROR,
         response = ServiceUnavailable.class),
         @ApiResponse(code = 503, message = SERVICE_UNAVAILABLE, response = ServiceUnavailable.class)})
+
 public class OrderController {
     private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -46,7 +47,7 @@ public class OrderController {
     @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, responseContainer = "List",
             response = Order.class)})
     public ResponseEntity<List<Order>> getOrders() {
-        logger.info(new Date() + " Get request received");
+        logger.info(new Date() + " Get request received for all orders");
         return new ResponseEntity<>(orderService.getOrders(), HttpStatus.OK);
     }
 

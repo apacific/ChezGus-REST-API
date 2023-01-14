@@ -70,11 +70,23 @@ public class DataLoader implements CommandLineRunner {
                 ));
         itemRepository.save(
                 new Item(
-                        "cookie", "shortbread, frosted", BigDecimal.valueOf(2.25)
+                        "eggs", "gently scrambled, with a golden crisp edge", BigDecimal.valueOf(3.25)
+                ));
+        itemRepository.save(
+                new Item(
+                        "muffin", "brown sugar + cinnamon", BigDecimal.valueOf(2.50)
+                ));
+        itemRepository.save(
+                new Item(
+                        "cookies", "one each - chocolate chip, shortbread, oatmeal", BigDecimal.valueOf(3.75)
                 ));
         itemRepository.save(
                 new Item(
                         "ice cream", "vanilla, two scoops", BigDecimal.valueOf(2.00)
+                ));
+        itemRepository.save(
+                new Item(
+                        "soda", "cola", BigDecimal.valueOf(1.50)
                 ));
     }
 }

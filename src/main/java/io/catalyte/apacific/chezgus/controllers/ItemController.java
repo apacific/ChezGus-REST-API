@@ -23,7 +23,7 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
  * CRUD methods for the Item entity
  */
 @RestController
-@RequestMapping(CONTEXT_ORDERS + ORDER_ID_ENDPOINT + CONTEXT_ITEMS)
+@RequestMapping(CONTEXT_ITEMS)
 @ApiOperation("Gets responses for 500 errors")
 @ApiResponses(value = {@ApiResponse(code = 500, message = UNEXPECTED_SERVER_ERROR,
         response = HttpServerErrorException.ServiceUnavailable.class),
@@ -38,15 +38,14 @@ public class ItemController {
     /**
      * Get all the items for an order in the database
      *
-     * @param orderId the id of the order with items from the path variable
      * @return list of items and status 200
      */
     @GetMapping
-    @ApiOperation("Gets from the database all the items based on the order id")
+    @ApiOperation("Gets from the database all the items")
     @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, responseContainer = "List",
             response = Item.class)})
-    public ResponseEntity<List<Item>> getItems(@PathVariable Long orderId) {
-        logger.info(new Date() + " Get request received of items for patient with id: " + orderId);
+    public ResponseEntity<List<Item>> getItems() {
+        logger.info(new Date() + " Get request received for all items");
         return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
     }
 
