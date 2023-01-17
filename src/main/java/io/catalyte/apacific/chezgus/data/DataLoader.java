@@ -1,8 +1,8 @@
 package io.catalyte.apacific.chezgus.data;
 
 
-import io.catalyte.apacific.chezgus.entities.Item;
-import io.catalyte.apacific.chezgus.entities.Order;
+import io.catalyte.apacific.chezgus.entities.MenuItem;
+import io.catalyte.apacific.chezgus.entities.CustomerOrder;
 import io.catalyte.apacific.chezgus.repositories.ItemRepository;
 import io.catalyte.apacific.chezgus.repositories.OrderRepository;
 import org.slf4j.Logger;
@@ -27,11 +27,11 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private ItemRepository itemRepository;
 
-    private Order order1;
-    private Order order2;
-    private Order order3;
-    private Order order4;
-    private Order order5;
+    private CustomerOrder customerOrder1;
+    private CustomerOrder customerOrder2;
+    private CustomerOrder customerOrder3;
+    private CustomerOrder customerOrder4;
+    private CustomerOrder customerOrder5;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,50 +42,54 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadOrders() {
         orderRepository.save(
-                new Order(
+                new CustomerOrder(
                         1L, 2L, BigDecimal.valueOf(1.00)
                 ));
         orderRepository.save(
-                new Order(
+                new CustomerOrder(
                         2L, 4L, BigDecimal.valueOf(1.00)
                 ));
         orderRepository.save(
-                new Order(
+                new CustomerOrder(
                         3L, 1L, BigDecimal.valueOf(1.00)
                 ));
     }
 
     private void loadItems() {
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "cheese pizza", "one slice", BigDecimal.valueOf(3.00)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "toast", "two slices", BigDecimal.valueOf(1.00)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "fries", "hot, salty, crisp, golden", BigDecimal.valueOf(2.50)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "eggs", "gently scrambled, with a golden crisp edge", BigDecimal.valueOf(3.25)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "muffin", "brown sugar + cinnamon", BigDecimal.valueOf(2.50)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "cookies", "one each - chocolate chip, shortbread, oatmeal", BigDecimal.valueOf(3.75)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
                         "ice cream", "vanilla, two scoops", BigDecimal.valueOf(2.00)
                 ));
         itemRepository.save(
-                new Item(
+                new MenuItem(
+                        "vanilla frappe", "Vincent Vega approves", BigDecimal.valueOf(5.00)
+                ));
+        itemRepository.save(
+                new MenuItem(
                         "soda", "cola", BigDecimal.valueOf(1.50)
                 ));
     }

@@ -1,6 +1,6 @@
 package io.catalyte.apacific.chezgus.services;
 
-import io.catalyte.apacific.chezgus.entities.Item;
+import io.catalyte.apacific.chezgus.entities.MenuItem;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import java.util.List;
  * Item service interface with create and update methods for an Item
  */
 public interface ItemService {
-    List<Item> getItems();
-    Item getItemById(Long id);
-    Item addItem(Item item);
-    Item updateItemById(Long id, Item item);
+    List<MenuItem> getItems();
+    MenuItem getItemById(Long id);
+    MenuItem addItem(MenuItem menuItem);
+    MenuItem updateItemById(Long id, MenuItem menuItem);
     void deleteItem(Long id);
 }

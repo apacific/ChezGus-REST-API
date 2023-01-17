@@ -1,6 +1,6 @@
 package io.catalyte.apacific.chezgus.repositories;
 
-import io.catalyte.apacific.chezgus.entities.Order;
+import io.catalyte.apacific.chezgus.entities.CustomerOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Repository to store customer orders.
  */
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<CustomerOrder, Long> {
 
     // Queries
     boolean existsByItemId(Long ItemId);

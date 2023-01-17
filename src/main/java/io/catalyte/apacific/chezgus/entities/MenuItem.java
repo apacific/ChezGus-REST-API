@@ -17,7 +17,7 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
  */
 @Entity
 @Table(name = "items")
-public class Item {
+public class MenuItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,12 +35,12 @@ public class Item {
             required = true)
     private BigDecimal price;
 
-    public Item() {
+    public MenuItem() {
     }
 
-    public Item(@NotBlank(message = "name" + REQUIRED_FIELD) String name,
-                @NotBlank(message = "description" + REQUIRED_FIELD) String description,
-                @NotNull(message = "price" + REQUIRED_FIELD) BigDecimal price) {
+    public MenuItem(@NotBlank(message = "name" + REQUIRED_FIELD) String name,
+                    @NotBlank(message = "description" + REQUIRED_FIELD) String description,
+                    @NotNull(message = "price" + REQUIRED_FIELD) BigDecimal price) {
 
         this.name = name;
         this.description = description;
@@ -93,11 +93,11 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(id, item.id) &&
-                Objects.equals(name, item.name) &&
-                Objects.equals(description, item.description) &&
-                Objects.equals(price, item.price);
+        MenuItem menuItem = (MenuItem) o;
+        return Objects.equals(id, menuItem.id) &&
+                Objects.equals(name, menuItem.name) &&
+                Objects.equals(description, menuItem.description) &&
+                Objects.equals(price, menuItem.price);
     }
 
     @Override

@@ -16,7 +16,7 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.REQUIRED_FI
  */
 @Entity
 @Table(name = "orders")
-public class Order {
+public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = GENERATED_ID)
@@ -29,10 +29,10 @@ public class Order {
             required = true)
     private BigDecimal totalPrice;
 
-    public Order() {
+    public CustomerOrder() {
     }
 
-    public Order(Long id, Long itemId, @NotNull(message = "totalPrice" + REQUIRED_FIELD) BigDecimal totalPrice) {
+    public CustomerOrder(Long id, Long itemId, @NotNull(message = "totalPrice" + REQUIRED_FIELD) BigDecimal totalPrice) {
         this.id = id;
         this.itemId = itemId;
         this.totalPrice = totalPrice;
@@ -75,10 +75,10 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-                Objects.equals(itemId, order.itemId) &&
-                Objects.equals(totalPrice, order.totalPrice);
+        CustomerOrder customerOrder = (CustomerOrder) o;
+        return Objects.equals(id, customerOrder.id) &&
+                Objects.equals(itemId, customerOrder.itemId) &&
+                Objects.equals(totalPrice, customerOrder.totalPrice);
     }
 
     @Override

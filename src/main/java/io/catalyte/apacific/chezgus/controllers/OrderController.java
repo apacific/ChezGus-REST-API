@@ -1,6 +1,6 @@
 package io.catalyte.apacific.chezgus.controllers;
 
-import io.catalyte.apacific.chezgus.entities.Order;
+import io.catalyte.apacific.chezgus.entities.CustomerOrder;
 import io.catalyte.apacific.chezgus.exceptions.ServiceUnavailable;
 import io.catalyte.apacific.chezgus.services.OrderService;
 import io.swagger.annotations.ApiOperation;
@@ -45,8 +45,8 @@ public class OrderController {
     @ApiOperation("Gets all the orders in the database or based on queryable criteria within "
             + "order object")
     @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, responseContainer = "List",
-            response = Order.class)})
-    public ResponseEntity<List<Order>> getOrders() {
+            response = CustomerOrder.class)})
+    public ResponseEntity<List<CustomerOrder>> getOrders() {
         logger.info(new Date() + " Get request received for all orders");
         return new ResponseEntity<>(orderService.getOrders(), HttpStatus.OK);
     }
@@ -59,9 +59,9 @@ public class OrderController {
      */
     @GetMapping(ID_ENDPOINT)
     @ApiOperation("Gets an order by ID")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = Order.class),
+    @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = CustomerOrder.class),
             @ApiResponse(code = 404, message = HTTP_404)})
-    public ResponseEntity<Order> getOrder(@PathVariable Long id) {
+    public ResponseEntity<CustomerOrder> getOrder(@PathVariable Long id) {
         logger.info(new Date() + " Get by id " + id + " request received");
         return new ResponseEntity<>(orderService.getOrderById(id), HttpStatus.OK);
     }
@@ -69,34 +69,34 @@ public class OrderController {
     /**
      * Adds new order to the database
      *
-     * @param order the order from the request body being added
+     * @param customerOrder the order from the request body being added
      * @return the order if added correctly
      */
     @PostMapping
     @ApiOperation("Adds a new order to the database")
-    @ApiResponses(value = {@ApiResponse(code = 201, message = HTTP_201, response = Order.class),
+    @ApiResponses(value = {@ApiResponse(code = 201, message = HTTP_201, response = CustomerOrder.class),
             @ApiResponse(code = 400, message = HTTP_400), @ApiResponse(code = 409, message = HTTP_409)})
-    public ResponseEntity<Order> addOrder(@Valid @RequestBody Order order) {
+    public ResponseEntity<CustomerOrder> addOrder(@Valid @RequestBody CustomerOrder customerOrder) {
         logger.info(new Date() + " Post request received");
-        return new ResponseEntity<>(orderService.addOrder(order), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.addOrder(customerOrder), HttpStatus.CREATED);
     }
 
     /**
      * Updates an order within the database
      *
      * @param id    the id of the order to be updated from the path variable
-     * @param order the order's new information from the request body
+     * @param customerOrder the order's new information from the request body
      * @return the order if correctly updated
      */
     @PutMapping(ID_ENDPOINT)
     @ApiOperation("Updates order by ID")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = Order.class),
+    @ApiResponses(value = {@ApiResponse(code = 200, message = HTTP_200, response = CustomerOrder.class),
             @ApiResponse(code = 400, message = HTTP_400), @ApiResponse(code = 404, message = HTTP_404),
             @ApiResponse(code = 409, message = HTTP_409)})
-    public ResponseEntity<Order> updateOrderById(@PathVariable Long id,
-                                                 @Valid @RequestBody Order order) {
+    public ResponseEntity<CustomerOrder> updateOrderById(@PathVariable Long id,
+                                                         @Valid @RequestBody CustomerOrder customerOrder) {
         logger.info(new Date() + " Put request received for id: " + id);
-        return new ResponseEntity<>(orderService.updateOrderById(id, order), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.updateOrderById(id, customerOrder), HttpStatus.OK);
     }
 
     /**

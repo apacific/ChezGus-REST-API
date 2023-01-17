@@ -1,6 +1,6 @@
 package io.catalyte.apacific.chezgus.services;
 
-import io.catalyte.apacific.chezgus.entities.Order;
+import io.catalyte.apacific.chezgus.entities.CustomerOrder;
 import io.catalyte.apacific.chezgus.exceptions.BadDataResponse;
 import io.catalyte.apacific.chezgus.exceptions.ResourceNotFound;
 import io.catalyte.apacific.chezgus.exceptions.ServiceUnavailable;
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
      */
 
     @Override
-    public List<Order> getOrders() {
+    public List<CustomerOrder> getOrders() {
         try {
             return orderRepository.findAll();
         } catch (Exception e) {
@@ -52,32 +52,32 @@ public class OrderServiceImpl implements OrderService {
      * @return a order or an error
      */
     @Override
-    public Order getOrderById(Long id) {
-        Order order;
+    public CustomerOrder getOrderById(Long id) {
+        CustomerOrder customerOrder;
         try {
-            order = orderRepository.findById(id).orElse(null);
-            if (order == null) {
+            customerOrder = orderRepository.findById(id).orElse(null);
+            if (customerOrder == null) {
                 throw new ResourceNotFound(ID_NOT_FOUND);
             }
         } catch (ResourceNotFound | ServiceUnavailable e) {
             logger.error(e.getLocalizedMessage());
             throw e;
         }
-        return order;
+        return customerOrder;
     }
 
 
     /**
      * Adds a new order to the database
      *
-     * @param order the order being added
+     * @param customerOrder the order being added
      * @return the newly added order, or an error
      */
     @Override
-    public Order addOrder(Order order) {
+    public CustomerOrder addOrder(CustomerOrder customerOrder) {
 
         try {
-            return orderRepository.save(order);
+            return orderRepository.save(customerOrder);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new ServiceUnavailable(e);
@@ -88,25 +88,25 @@ public class OrderServiceImpl implements OrderService {
      * Updates a order with a specific id
      *
      * @param id the id of the order to be updated
-     * @param order the order's pending information
+     * @param customerOrder the order's pending information
      * @return the order's new information or an error
      */
     @Override
-    public Order updateOrderById(Long id, Order order) {
-        Order existingOrder;
+    public CustomerOrder updateOrderById(Long id, CustomerOrder customerOrder) {
+        CustomerOrder existingCustomerOrder;
 
         // Checks if id in path matches order's new information
-        if (!order.getId().equals(id)) {
+        if (!customerOrder.getId().equals(id)) {
             throw new BadDataResponse(ID_MUST_MATCH);
         }
         try {
             // Gets the existing order from the database
-            existingOrder = orderRepository.findById(id).orElse(null);
+            existingCustomerOrder = orderRepository.findById(id).orElse(null);
             // Throws an error if order is null
-            if (existingOrder == null) {
+            if (existingCustomerOrder == null) {
                 throw new ResourceNotFound(ID_NOT_FOUND);
             }
-            return orderRepository.save(order);
+            return orderRepository.save(customerOrder);
         } catch (ResourceNotFound | ServiceUnavailable e) {
             logger.error(e.getLocalizedMessage());
             throw e;

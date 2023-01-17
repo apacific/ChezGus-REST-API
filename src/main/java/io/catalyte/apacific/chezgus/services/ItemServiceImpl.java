@@ -1,6 +1,6 @@
 package io.catalyte.apacific.chezgus.services;
 
-import io.catalyte.apacific.chezgus.entities.Item;
+import io.catalyte.apacific.chezgus.entities.MenuItem;
 import io.catalyte.apacific.chezgus.exceptions.BadDataResponse;
 import io.catalyte.apacific.chezgus.exceptions.ResourceNotFound;
 import io.catalyte.apacific.chezgus.exceptions.ServiceUnavailable;
@@ -35,7 +35,7 @@ public class ItemServiceImpl implements ItemService {
      * @return a lists of items or an error
      */
     @Override
-    public List<Item> getItems() {
+    public List<MenuItem> getItems() {
         try {
             return itemRepository.findAll();
         } catch (Exception e) {
@@ -51,30 +51,30 @@ public class ItemServiceImpl implements ItemService {
      * @return an item or an error
      */
     @Override
-    public Item getItemById(Long id) {
-        Item item;
+    public MenuItem getItemById(Long id) {
+        MenuItem menuItem;
         try {
-            item = itemRepository.findById(id).orElse(null);
-            if (item == null) {
+            menuItem = itemRepository.findById(id).orElse(null);
+            if (menuItem == null) {
                 throw new ResourceNotFound(ID_NOT_FOUND);
             }
         } catch (ResourceNotFound | ServiceUnavailable e) {
             logger.error(e.getLocalizedMessage());
             throw e;
         }
-        return item;
+        return menuItem;
     }
 
     /**
      * Add an item to the database
      *
-     * @param item the item to be added
+     * @param menuItem the item to be added
      * @return the added item or an error
      */
     @Override
-    public Item addItem(Item item) {
+    public MenuItem addItem(MenuItem menuItem) {
         try {
-            return itemRepository.save(item);
+            return itemRepository.save(menuItem);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new ServiceUnavailable(e);
@@ -85,22 +85,22 @@ public class ItemServiceImpl implements ItemService {
      * Update an item with an specific id
      *
      * @param id   the item's id
-     * @param item the item's new information
+     * @param menuItem the item's new information
      * @return an item
      */
     @Override
-    public Item updateItemById(Long id, Item item) {
-        Item existingItem;
+    public MenuItem updateItemById(Long id, MenuItem menuItem) {
+        MenuItem existingMenuItem;
         //check if id in path matches id in item's new information
-        if (!item.getId().equals(id)) {
+        if (!menuItem.getId().equals(id)) {
             throw new BadDataResponse(ID_MUST_MATCH);
-        } else if (item.getId() == null) {
+        } else if (menuItem.getId() == null) {
             throw new ResourceNotFound(ID_NOT_FOUND);
         }
         try {
             //get existing item from database
-            existingItem = itemRepository.findById(id).orElse(null);
-            return this.addItem(item);
+            existingMenuItem = itemRepository.findById(id).orElse(null);
+            return this.addItem(menuItem);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new ServiceUnavailable(e);
