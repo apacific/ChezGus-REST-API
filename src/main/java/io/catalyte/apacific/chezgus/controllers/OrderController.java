@@ -84,7 +84,7 @@ public class OrderController {
     /**
      * Updates an order within the database
      *
-     * @param id    the id of the order to be updated from the path variable
+     * @param id the id of the order to be updated from the path variable
      * @param customerOrder the order's new information from the request body
      * @return the order if correctly updated
      */

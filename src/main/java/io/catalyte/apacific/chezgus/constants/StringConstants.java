@@ -17,6 +17,7 @@ public class StringConstants {
     public static final String ID_NOT_FOUND =
             "You attempted an operation on an id that does not exist in the database";
     public static final String ID_MUST_MATCH = "ID must match the ID specified in the URL.";
+    public static final String INVALID_POSITIVE = "A positive value is required for this field";
     public static final String ITEM_ID_NOT_FOUND =
             "There is no item " + "matching this id in the database";
     public static final String ORDER_ID_NOT_FOUND = "This order id isn't in the database";

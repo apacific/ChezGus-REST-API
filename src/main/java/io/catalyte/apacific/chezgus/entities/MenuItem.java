@@ -2,6 +2,7 @@ package io.catalyte.apacific.chezgus.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ import static io.catalyte.apacific.chezgus.constants.StringConstants.*;
  * Many-to-many relationship with Order.
  */
 @Entity
-@Table(name = "items")
+@Table(name = "menu_item")
 public class MenuItem {
 
     @Id
@@ -35,16 +36,15 @@ public class MenuItem {
             required = true)
     private BigDecimal price;
 
-    public MenuItem() {
-    }
-
     public MenuItem(@NotBlank(message = "name" + REQUIRED_FIELD) String name,
                     @NotBlank(message = "description" + REQUIRED_FIELD) String description,
                     @NotNull(message = "price" + REQUIRED_FIELD) BigDecimal price) {
-
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    private MenuItem() {
     }
 
     public Long getId() {
@@ -103,6 +103,14 @@ public class MenuItem {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, price);
+    }
+
+    @JsonIgnore
+    public boolean isEmpty() {
+        return Objects.isNull(id) &&
+                Objects.isNull(name) &&
+                Objects.isNull(description) &&
+                Objects.isNull(price);
     }
 }
 
